@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Edit</title>
+{% endblock %}
+
+{% block body %}
+    <h2>Edit Record</h2>
+    <form class="form-group" action="/edit/{{ record.id }}" method="post">
+        <label for="stock_id">Stock ID</label>
+        <input class="form-control" type="text" name="stock_id" id="stock_id" value="{{ record.stock_id }}" />
+
+        <label for="stock_name">Stock Name</label>
+        <input class="form-control" type="text" name="stock_name" id="stock_name" value="{{ record.stock_name }}" />
+
+        <label for="stock_amount">Stock Amount</label>
+        <input class="form-control" type="text" name="stock_amount" id="stock_amount" value="{{ record.stock_amount }}" />
+
+        <label for="close_amount">Bought Close Amount</label>
+        <input class="form-control" type="text" name="close_amount" id="close_amount" value="{{ record.close_amount }}" />
+
+        <label for="handling_fee">Handling Fee</label>
+        <input class="form-control" type="handling_fee" name="handling_fee" id="handling_fee" value="{{ record.handling_fee }}" />
+
+        <label for="buy_date">Buy Date</label>
+        <input class="form-control" type="text" name="buy_date" id="buy_date" value="{{ record.buy_date }}" />
+
+        <input class="btn btn-success form-control" type="submit" value="Update" />
+        <input class="btn btn-danger form-control" type="button" value="Cancel" onclick="return location.href='/records/1';" />
+    </form>
+{% endblock %}

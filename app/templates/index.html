@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Index</title>
+{% endblock %}
+
+{% block body %}
+    <div class="jumbotron mt-3">
+        <h1>River2056's Stock Holding</h1>
+        <p class="lead">Stock Recordings and Analysis</p>
+        {% if login %}
+            <h3>User Logged In</h3>
+        {% else %}
+            <form class="form-row" id="loginForm">
+                <div class="col-5">
+                    <label for="username">Username: </label>
+                    <input class="form-control" type="text" name="username" id="username" />
+                </div>
+
+                <div class="col-5">
+                    <label for="password">Password: </label>
+                    <input class="form-control" type="password" name="password" id="password" />
+                </div>
+
+                <div class="col">
+                    <label for="login">Login</label>
+                    <input class="form-control btn btn-primary" type="button" id="login" value="Login" onclick="loginForm();"/>
+                </div>
+            </form>
+        {% endif %}
+        <br />
+        <a class="btn btn-lg btn-primary" href="/records/1" role="button">View Records »</a>
+        <a class="btn btn-lg btn-primary" href="/pick_golden_cross" role="button">View Golden-Cross Stocks »</a>
+    </div>
+{% endblock %}
+
+{% block scriptSection %}
+    <script>
+        function loginForm() {
+            // simple login function
+            $.ajax({
+                url: '/login',
+                data: $('#loginForm').serialize(),
+                type: 'POST',
+                dataType: 'json',
+                success: function (jsonObj) {
+                    alert(jsonObj.msg);
+                    if(jsonObj.login_token === 1) {
+                        window.location.href = '/records/1'
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

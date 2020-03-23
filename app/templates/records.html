@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Stock Net Worth</title>
+{% endblock %}
+
+{% block body %}
+    <div>
+        <h2>DashBoard</h2>
+    </div>
+
+    <div>
+        <h3>Enter new record</h3>
+        <div class="form-group">
+            <form id="record_form">
+                <div class="col">
+                    <label for="stock_id">Stock ID</label>
+                    <input class="form-control" name="stock_id" id="stock_id" type="text" placeholder="stock_id"/>
+                </div>
+
+                <div class="col">
+                    <label for="stock_amount">Stock Amount</label>
+                    <input class="form-control" name="stock_amount" id="stock_amount" type="text" placeholder="stock_amount"/>
+                </div>
+
+                <div class="col">
+                    <label for="bought_close_price">Money spent buying?</label>
+                    <input class="form-control" name="bought_close_price" id="bought_close_price" type="text" placeholder="bought_close_price"/>
+                </div>
+
+                <div class="col">
+                    <br />
+                    <input class="form-control btn btn-primary" type="button" value="Submit" onclick="postRecord();"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br/>
+
+    {# stock records table start #}
+    <div>
+        <h3 style="display: inline;">Stock Holding Records</h3>
+        <span>
+            <input class="btn btn-sm btn-success" value="Update Stock Prices" onclick="updateCurrentStockPrice();" />
+        </span>
+        <span>
+            <a class="btn btn-sm btn-secondary" href="/download_csv">download as CSV</a>
+        </span>
+        <table id="stock_records" class="table table-striped table-bordered">
+            <thead>
+                <td>Stock ID</td>
+                <td width="14%">Stock Name</td>
+                <td>Bought Amount</td>
+                <td>Close Amount</td>
+                <td>Handling Fee</td>
+                <td>Money Spent</td>
+                <td width="11%">Buy Date</td>
+                <td>Current Price</td>
+                <td>Net Worth</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.stock_id }}</td>
+                        <td>{{ record.stock_name }}</td>
+                        <td>{{ record.stock_amount }}</td>
+                        <td>{{ '%0.2f' % record.close_amount }}</td>
+                        <td>{{ '%0.2f' % record.handling_fee }}</td>
+                        <td>{{ '%0i' % record.money_spent }}</td>
+                        <td>{{ record.buy_date }}</td>
+                        <td>{{ '%0.2f' % record.current_price }}</td>
+                        <td>{{ '%0i' % record.net_worth }}</td>
+                        <td><a class="btn btn-primary" href="/edit/{{ record.id }}">Edit</a></td>
+                        <td><a class="btn btn-danger" href="/delete/{{ record.id }}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    {# stock records table end #}
+
+    <br />
+    {# count each stock holding start #}
+    <h3>Each Stock Holding</h3>
+    <table class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <td>ID/Name</td>
+                <td>Total Holdings</td>
+                <td>Current Worth</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in count_each %}
+                <tr>
+                    <td>{{ record.stock_name }}</td>
+                    <td>{{ record.stock_amount }}</td>
+                    <td>{{ record.current_worth }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {# count each stock holding end #}
+    <br />
+
+    {# net worth table start #}
+    <h3>Net Worth Table</h3>
+    <table class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <td>Total Bought Amount</td>
+                <td>Total Net Worth</td>
+                <td>Total Handling Fee</td>
+                <td>Current Balance</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ '%0i' % net_worth_map['total_bought_amount'] }}</td>
+                <td>{{ '%0i' % net_worth_map['total_net_worth'] }}</td>
+                <td>{{ '%0.2f' % net_worth_map['total_handling_fee'] }}</td>
+                <td>{{ '%0i' % net_worth_map['current_balance'] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {# net worth table end #}
+{% endblock %}
+
+{% block scriptSection %}
+    <script>
+        // ajax post info and fetch new datatable
+        function postRecord() {
+            // insert new record
+            $.ajax({
+                url: '/do_posts',
+                data: $('#record_form').serialize(),
+                type: 'POST',
+                dataType: 'json',
+                beforeSend: function() {
+                    $.blockUI();
+                },
+                success: function (jsonObj) {
+                    console.log(jsonObj)
+                    alert('Done inserting!');
+                    location.href = '/records/1';
+                    $.unblockUI();
+                },
+                error: function () {
+                    alert('An error occurred while inserting!');
+                }
+            });
+        }
+
+        function updateCurrentStockPrice() {
+            // update current stock prices
+            $.ajax({
+                url: '/update_stocks',
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function() {
+                    $.blockUI();
+                },
+                success: function(jsonObj) {
+                    console.log(jsonObj);
+                    alert('Done updating!');
+                    location.href = '/records/1';
+                    $.unblockUI();
+                },
+                error: function() {
+                    alert('update stock prices failed!');
+                }
+            });
+        }
+
+        function exportCSV() {
+            // export records as CSV
+            $.ajax({
+                url: '/download_csv',
+                type: 'GET',
+                dataType: 'text',
+                beforeSend: function() {
+                    $.blockUI();
+                },
+                success: function(jsonObj) {
+                    window.location.href = '/records/1';
+                    $.unblockUI();
+                },
+                error: function() {
+                    alert('error while exporting CSV!');
+                }
+            });
+        }
+
+        $(function() {
+            $('#stock_records').DataTable();
+        });
+    </script>
+{% endblock %}
