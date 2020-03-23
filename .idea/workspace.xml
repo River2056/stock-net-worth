@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="169413b2-5cc9-4847-91f6-f29559b55312" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/add_new_stock.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/pick_value_stock.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/records.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/records.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/pick_golden_cross.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/pick_golden_cross.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +107,8 @@
       <workItem from="1584776969316" duration="70000" />
       <workItem from="1584930818125" duration="1903000" />
       <workItem from="1584932796803" duration="115000" />
-      <workItem from="1584933576921" duration="3849000" />
+      <workItem from="1584933576921" duration="4582000" />
+      <workItem from="1584970079923" duration="5264000" />
     </task>
     <servers />
   </component>
@@ -141,22 +144,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="713" y="293" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584772158379" />
-    <state width="1877" height="230" key="GridCell.Tab.0.bottom" timestamp="1584936021461">
+    <state width="1877" height="230" key="GridCell.Tab.0.bottom" timestamp="1584975770892">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="230" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584936021461" />
-    <state width="1877" height="230" key="GridCell.Tab.0.center" timestamp="1584936021461">
+    <state width="1877" height="230" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584975770892" />
+    <state width="1877" height="230" key="GridCell.Tab.0.center" timestamp="1584975770892">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="230" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584936021461" />
-    <state width="1877" height="230" key="GridCell.Tab.0.left" timestamp="1584936021460">
+    <state width="1877" height="230" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584975770892" />
+    <state width="1877" height="230" key="GridCell.Tab.0.left" timestamp="1584975770891">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="230" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584936021460" />
-    <state width="1877" height="230" key="GridCell.Tab.0.right" timestamp="1584936021461">
+    <state width="1877" height="230" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584975770891" />
+    <state width="1877" height="230" key="GridCell.Tab.0.right" timestamp="1584975770892">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="230" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584936021461" />
+    <state width="1877" height="230" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584975770892" />
     <state width="1877" height="264" key="GridCell.Tab.1.bottom" timestamp="1584615402457">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -173,14 +176,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="264" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584615402456" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1584772462289">
+    <state x="461" y="162" key="SettingsEditor" timestamp="1584970135441">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584772462289" />
-    <state x="647" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1584933577162">
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584970135441" />
+    <state x="647" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1584970080066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="647" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584933577162" />
+    <state x="647" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584970080066" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1584533749128">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -194,6 +197,6 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/stock_net_worth$stock_net_worth.coverage" NAME="stock_net_worth Coverage Results" MODIFIED="1584936021449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/stock_net_worth$stock_net_worth.coverage" NAME="stock_net_worth Coverage Results" MODIFIED="1584975770882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

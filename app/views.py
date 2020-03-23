@@ -6,7 +6,8 @@ from flask import redirect
 from flask import jsonify
 from flask import make_response
 from flask import session
-from io import StringIO, BytesIO
+from io import StringIO
+import pandas as pd
 from app import app
 from app import db
 from app.models import StockHolding
@@ -245,3 +246,22 @@ def delete_current_price(id):
     db.session.execute(delete_current_price_sql)
     db.session.commit()
     return redirect('/add_new_stock')
+
+
+@app.route('/pick_value_stock')
+def pick_value_stock_page():
+    json_info = helpers.get_value_stocks_info()
+    df = pd.DataFrame(json_info['data'], columns=['證券代號', '證券名稱', '殖利率(%)', '股利年度', '本益比', '股價淨值比', '財報年/季'])
+    PER = pd.to_numeric(df['本益比'], errors='coerce') < 13
+    EPS = pd.to_numeric(df['股價淨值比'], errors='coerce') < 0.7
+    df = df[(PER & EPS)]
+
+    get_stocks = []
+    if len(df) > 50:
+        for i in df.index:
+            current_stock_info_soup = helpers.get_current_stock_info(df.loc[i].values[0])
+            close_price = current_stock_info_soup.find_all('b')[1].get_text()
+            if float(close_price) > 10:
+                get_stocks.append(df.loc[i].values)
+    print(get_stocks)
+    return render_template('pick_value_stock.html', stocks=get_stocks)

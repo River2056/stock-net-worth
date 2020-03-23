@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Value Stock</title>
+{% endblock %}
+
+{% block body %}
+    <div>
+        <button class="btn btn-secondary" onclick="invalidateSession();">Invalidate session cache</button>
+    </div>
+    <div>
+        <h2>價值型選股</h2>
+    </div>
+    <div>
+        <ul>
+            <li>本益比 < 13</li>
+            <li>股價淨值比 < 0.7</li>
+            <li>股價大於10元</li>
+        </ul>
+    </div>
+    <div>
+        <table id="value_stocks" class="table table-striped table-bordered">
+            <thead>
+                <th>證劵代號</th>
+                <th>證券名稱</th>
+                <th>殖利率(%)</th>
+                <th>股利年度</th>
+                <th>本益比</th>
+                <th>股價淨值比</th>
+                <th>財報年/季</th>
+            </thead>
+            <tbody>
+                {% if stocks|length > 0 %}
+                    {% for item in stocks %}
+                        <tr>
+                            <td>{{ item[0] }}</td>
+                            <td>{{ item[1] }}</td>
+                            <td>{{ item[2] }}</td>
+                            <td>{{ item[3] }}</td>
+                            <td>{{ item[4] }}</td>
+                            <td>{{ item[5] }}</td>
+                            <td>{{ item[6] }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7">沒有股票</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block scriptSection %}
+    <script>
+        function invalidateSession() {
+            $.ajax({
+                url: '/invalidate_session',
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function() {
+                    $.blockUI();
+                },
+                success: function(jsonObj) {
+                    alert('Success! Please wait while page refresh');
+                    window.location.href = '/pick_value_stock';
+                    $.unblockUI();
+                },
+                error: function() {
+                    alert('something went wrong while invalidating!');
+                }
+            });
+        }
+
+        $(function() {
+           $('#value_stocks').DataTable();
+        });
+    </script>
+{% endblock %}

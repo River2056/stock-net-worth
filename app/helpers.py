@@ -8,7 +8,7 @@ def get_current_stock_info(stock):
     url = 'https://tw.stock.yahoo.com/q/q?s=' + stock
     res = requests.get(url)
     soup = BeautifulSoup(res.content, 'html.parser')
-    time.sleep(1)
+    # time.sleep(1)
     return soup
 
 
@@ -57,6 +57,15 @@ def get_share_holding_amount_greater_than_2billion():
     url = 'https://tw.screener.finance.yahoo.net/screener/ws?PickID=100538,100539,100540,100541&f=j&796'
     list_req = requests.get(url)
     soup = BeautifulSoup(list_req.content, "html.parser")
+    get_json = json.loads(soup.text)
+    time.sleep(1)
+    return get_json
+
+
+def get_value_stocks_info():
+    url = 'https://www.twse.com.tw/exchangeReport/BWIBBU_d?response=json&date=&selectType=&_=' + str(time.time())
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, 'html.parser')
     get_json = json.loads(soup.text)
     time.sleep(1)
     return get_json
