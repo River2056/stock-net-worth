@@ -33,6 +33,8 @@ join current_stock_price b
 on a.stock_id = b.stock_id
 group by a.stock_name, b.current_price'''
 
+all_current_stock_price_sql = '''select * from current_stock_price'''
+
 
 @app.route('/')
 def index():
@@ -216,3 +218,30 @@ def download_csv():
 def invalidate_session():
     session.clear()
     return jsonify({'msg': 'session_cleared'})
+
+
+@app.route('/add_new_stock')
+def add_new_stock_page():
+    current_price = db.engine.execute(all_current_stock_price_sql).fetchall()
+    return render_template('add_new_stock.html', records=current_price)
+
+
+@app.route('/add_new_monitor_stock', methods=['POST'])
+def add_new_monitor_stock():
+    stock_id = request.form['stock_id']
+    stock_name = request.form['stock_name']
+    current_price = float(request.form['current_price'])
+    insert_sql = "INSERT INTO current_stock_price(stock_id, stock_name, current_price) VALUES('{}', '{}', {})".format(
+        stock_id, stock_name, current_price)
+    db.session.execute(insert_sql)
+    db.session.commit()
+    time.sleep(1)
+    return jsonify({'msg': 'success'})
+
+
+@app.route('/delete_current_price/<int:id>', methods=['GET'])
+def delete_current_price(id):
+    delete_current_price_sql = "DELETE FROM current_stock_price WHERE id = '{}'".format(id)
+    db.session.execute(delete_current_price_sql)
+    db.session.commit()
+    return redirect('/add_new_stock')
